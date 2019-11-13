@@ -2,6 +2,7 @@
 package ModeloClases;
 import Conexion.Conexion;
 import Modelo.ClsBodega;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Date;
@@ -11,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.sql.Date;
+import java.time.LocalDate;
 /**
  *
  * @author Stephany-AG
@@ -41,4 +44,23 @@ public class Bodega {
             JOptionPane.showMessageDialog(null, ex);
     } 
     }
+           public ArrayList<ClsBodega> MostrarBodega() {
+            ArrayList<ClsBodega> ClsBodega = new ArrayList<>();
+            try {
+                CallableStatement cb = con.prepareCall("Select*from Bodega");
+                ResultSet rs = cb.executeQuery();
+                while (rs.next()) {
+                    ClsBodega e = new ClsBodega();
+                    e.setIdBodega(rs.getInt("Id"));
+                    e.setIdProducto(rs.getInt("IdProducto"));
+                    e.setCodigo(rs.getString("Codigo"));
+                    e.setExistencia(rs.getInt("Existencia"));
+                 //  e.getFecha(rs.getLocalDate("Fecha"));
+                    ClsBodega.add(e);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error en la consulta!!" + e);
+            }
+            return ClsBodega;
+        }
 }
