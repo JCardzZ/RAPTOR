@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/edwin/Documents/Github/RAPTOR/POS/src/Modelo/ClsBodega.java</file>
+            <file>file:/C:/Users/edwin/Documents/Github/RAPTOR/POS/src/ModeloClases/Bodega.java</file>
+            <file>file:/C:/Users/edwin/Documents/Github/RAPTOR/POS/src/Vista/Menu.java</file>
+            <file>file:/C:/Users/edwin/Documents/Github/RAPTOR/POS/src/Modelo/ClsProductos.java</file>
+            <file>file:/C:/Users/edwin/Documents/Github/RAPTOR/POS/src/ModeloClases/Producto.java</file>
+        </group>
     </open-files>
 </project-private>

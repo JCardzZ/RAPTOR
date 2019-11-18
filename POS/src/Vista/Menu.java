@@ -34,6 +34,8 @@ import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import ModeloClases.Bodega;
 import Modelo.ClsBodega;
+import Modelo.ClsProductos;
+import ModeloClases.Producto;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -57,6 +59,10 @@ public class Menu extends javax.swing.JFrame {
     Matcher matcher;
     private List<ClsUsuarios> listUsuario;
     private List<ClsCajas> listCajas;
+    
+    
+    
+    
 
     public Menu(List<ClsUsuarios> listUsuario, List<ClsCajas> listCajas) {
         initComponents();
@@ -193,6 +199,38 @@ public class Menu extends javax.swing.JFrame {
         RadioDepartamento.setSelected(true);
         RadioDepartamento.setForeground(new Color(0, 153, 51));
 
+ 
+    }
+    
+    //Productos
+     void MostrarDatosProductos() {
+        try {
+            String titulos[] = {"IdProducto","Codigo","Producto","Precio","Descuento","Departamento","Categoria"
+            ,"Fecha"};
+        DefaultTableModel df = new DefaultTableModel(null, titulos);
+        Producto P=new Producto();
+        ArrayList<ClsProductos> PS = P.MostrarProductos();
+        Iterator i = PS.iterator();
+        String filas[] = new String[9];
+        while (i.hasNext()) {
+            ClsProductos cp;
+            cp=(ClsProductos) i.next();
+            filas[0] = String.valueOf(cp.getIdProducto());
+            filas[1] = cp.getCodigo();
+            filas[2] = cp.getProducto();
+            filas[3] = String.valueOf(cp.getPrecio());
+            filas[4] = String.valueOf(cp.getDescuento());
+            filas[5]=cp.getDepartamento();
+            filas[6]=cp.getCategoria();
+            filas[7]=String.valueOf(cp.getFecha());
+            
+            df.addRow(filas);
+        }      
+        jt.setModel(df);
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, e);
+        }
+        
     }
 //Bodega
         void MostrarDatosBodega() {
@@ -550,7 +588,6 @@ public class Menu extends javax.swing.JFrame {
         txtIdProducto = new javax.swing.JTextField();
         txtCodigo = new javax.swing.JTextField();
         txtExistencia = new javax.swing.JTextField();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         btnGuardarBodega = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jPanel48 = new javax.swing.JPanel();
@@ -1100,7 +1137,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addContainerGap())
         );
@@ -1347,7 +1384,7 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(120, 120, 120)
                         .addComponent(btnCancelarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, 406, Short.MAX_VALUE)
+            .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, 408, Short.MAX_VALUE)
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
@@ -1355,7 +1392,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(RadioAgreagarCliente)
@@ -1927,7 +1964,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPanel37.add(RadioPagosProveedor);
-        RadioPagosProveedor.setBounds(60, 150, 270, 37);
+        RadioPagosProveedor.setBounds(60, 150, 270, 36);
 
         RadioIngresarProveedor.setBackground(new java.awt.Color(255, 255, 255));
         RadioIngresarProveedor.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 24)); // NOI18N
@@ -1939,7 +1976,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPanel37.add(RadioIngresarProveedor);
-        RadioIngresarProveedor.setBounds(70, 110, 290, 37);
+        RadioIngresarProveedor.setBounds(70, 110, 290, 36);
 
         mensajeTelefonoProveedor.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
         mensajeTelefonoProveedor.setForeground(new java.awt.Color(204, 0, 0));
@@ -2034,7 +2071,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPanel40.add(btnImprimirReciboProveedor);
-        btnImprimirReciboProveedor.setBounds(1280, 420, 137, 41);
+        btnImprimirReciboProveedor.setBounds(1280, 420, 134, 48);
 
         jPanel36.add(jPanel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 1440, 480));
 
@@ -2307,6 +2344,11 @@ public class Menu extends javax.swing.JFrame {
         rSButtonRiple27.setBackground(new java.awt.Color(0, 119, 145));
         rSButtonRiple27.setText("Guardar (Enter)");
         rSButtonRiple27.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 24)); // NOI18N
+        rSButtonRiple27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonRiple27ActionPerformed(evt);
+            }
+        });
         jPanel11.add(rSButtonRiple27);
         rSButtonRiple27.setBounds(50, 470, 290, 50);
 
@@ -2414,7 +2456,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel49)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -3007,11 +3049,9 @@ public class Menu extends javax.swing.JFrame {
         jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel18.setForeground(java.awt.SystemColor.activeCaption);
         jLabel18.setText("Compras");
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel19.setForeground(java.awt.SystemColor.activeCaption);
         jLabel19.setText("Buscar");
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
@@ -3077,7 +3117,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel46Layout.setHorizontalGroup(
             jPanel46Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel46Layout.createSequentialGroup()
-                .addContainerGap(925, Short.MAX_VALUE)
+                .addContainerGap(928, Short.MAX_VALUE)
                 .addComponent(jLabel58)
                 .addGap(767, 767, 767))
         );
@@ -3233,7 +3273,6 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(36, 36, 36)
                         .addGroup(jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14)
                             .addComponent(txtExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3273,13 +3312,11 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(txtExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(45, 45, 45)
                         .addComponent(btnGuardarBodega)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEliminar)
-                        .addContainerGap(86, Short.MAX_VALUE))
+                        .addContainerGap(85, Short.MAX_VALUE))
                     .addGroup(jPanel45Layout.createSequentialGroup()
                         .addComponent(jPanel49, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(70, 70, 70))))
@@ -4131,6 +4168,10 @@ public class Menu extends javax.swing.JFrame {
       txtIdBodega.setEnabled(false);
     }//GEN-LAST:event_txtIdBodegaActionPerformed
 
+    private void rSButtonRiple27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonRiple27ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonRiple27ActionPerformed
+
     private void datosDpto() {
         if (RadioDepartamento.isSelected()) {
             accion = "update";
@@ -4572,7 +4613,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel fecha;
     private javax.swing.JLabel hora;
     private javax.swing.JCheckBox jCheckBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

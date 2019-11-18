@@ -7,7 +7,7 @@ public class Conexion {
 
     private String BaseDatos = "Programacionll";
     private String Usuario = "root";
-    private String Contraseña = "manuel2502";
+    private String Contraseña = "";
     private String Url = "jdbc:mysql://localhost/" + BaseDatos;
     private Connection conn = null;
 
